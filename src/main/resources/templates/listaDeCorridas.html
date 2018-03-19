@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style>
+tr th{
+border-style:solid;
+margin-right:25px; 
+}
+
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/passageiro/cadastrar">CorridaWeb</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/passageiro/cadastrar">Início</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Passageiros
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/passageiro/cadastrar">Cadastrar</a></li>
+          <li><a href="/passageiro/listar">Listar</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Motorista
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/motorista/cadastrar">Cadastrar</a></li>
+          <li><a href="/motorista/listar">Listar</a></li>
+        </ul>
+      </li>
+     <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Corrida
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/corrida/registrar">Registrar</a></li>
+          <li><a href="/corrida/listar">Listar</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+	<div class="container">
+		<h2 th:text="${mensagem}"></h2>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
+					<th>CPF</th>
+					<th>modeloDoCarro</th>
+					<th>status</th>
+					<th>sexo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="corrida: ${lista}">
+					<td th:text="${corrida.motorista.id}">${corrida.motorista.id}"</td>
+					<td th:text="${corrida.motorista.nome}">${corrida.motorista.nome}"</td>
+					<td th:text="${corrida.motorista.dataNascimento}">${corrida.motorista.dataNascimento}"</td>
+					<td th:text="${corrida.motorista.cpf}">${corrida.motorista.cpf}"</td>
+					<td th:text="${corrida.motorista.modeloDoCarro}">${corrida.motorista.modeloDoCarro}"</td>
+					<td th:text="${corrida.motorista.status}">${corrida.motorista.status}"</td>
+					<td th:text="${corrida.motorista.sexo}">${corrida.motorista.sexo}"</td>
+				</tr>
+			</tbody>
+		</table>
+	<a href="/corrida/registrar">Voltar para a tela de cadastro</a>
+	</div>
+	
+	
+
+</body>
+
+
+</html>
+

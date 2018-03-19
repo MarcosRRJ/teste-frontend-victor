@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/motorista/cadastrar">CorridaWeb</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/motorista/cadastrar">Início</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Passageiros
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/passageiro/cadastrar">Cadastrar</a></li>
+          <li><a href="/passageiro/listar">Listar</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Motorista
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/motorista/cadastrar">Cadastrar</a></li>
+          <li><a href="/motorista/listar">Listar</a></li>
+        </ul>
+      </li>
+     <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Corrida
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/corrida/registrar">Registrar</a></li>
+          <li><a href="/corrida/listar">Listar</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+	<form id="motorista">
+		Nome do Motorista:<br> <input type="text" name="nome"	id="nome" required> <br>
+		Data do Motorista:<br>	<input type="text" name="dataNascimento" id="dataNascimento" required> <br>
+		CPF Motorista:<br> <input type="text" name="cpf" id="cpf"	required> <br> 
+		Modelo do Carro:<br> <input	type="text" name="modeloDoCarro" id="modeloDoCarro" required> <br>
+		Sexo:<br> <select id="sexo" name="sexo">
+						  <option value="M">Masculino</option>
+						  <option value="F">Feminino</option>
+						</select> <br> 
+		status:<br> <select id="status" name="status">
+						  <option value="Ativo">Ativo</option>
+						  <option value="Inativo">Inativo</option>
+						</select>
+		
+		
+		<input type="button" value="Gravar" id="btnGravar"/>
+	</form>
+	
+	<p id="msgErro">
+	
+
+</body>
+
+<script>
+		$("#btnGravar").click(function(event) {
+			
+			if(document.getElementById("dataNascimento").value == "" ){
+				document.getElementById("msgErro").innerHTML = "Favor preencher Data de nascimento";
+				return false;
+			}
+			
+			if(document.getElementById("modeloDoCarro").value == ""){
+				document.getElementById("msgErro").innerHTML = "Favor preencher o campo Modelo do Carro";
+				return false
+			}
+			
+			if(document.getElementById("nome").value == ""){
+				document.getElementById("msgErro").innerHTML = "Favor preencher o campo Nome";
+				return false
+			}
+			if(document.getElementById("sexo").value == ""){
+				document.getElementById("msgErro").innerHTML = "Favor preencher o campo sexo";
+				return false
+			}
+			if(document.getElementById("cpf").value == ""){
+				document.getElementById("msgErro").innerHTML = "Favor preencher o campo cpf";
+				return false
+			}
+			
+			document.getElementById("msgErro").innerHTML = "";
+			
+			$.ajax({
+				url : '/motorista/gravar',
+				type : 'post',
+				contentType : 'application/x-www-form-urlencoded',
+				data :$('#motorista').serialize(),
+				dataType : 'json',
+				success : function(data, textStatus, jQxhr) {
+					$('#response pre').html(data);
+					console.log(data);
+				},
+				error : function(jqXhr, textStatus, errorThrown) {
+					console.log(errorThrown);
+				}
+			});
+		});
+		
+		
+		
+</script>
+
+</html>
+
